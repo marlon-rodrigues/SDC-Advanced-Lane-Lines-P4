@@ -51,26 +51,37 @@ The code for my perspective transform includes a function called `region_of_inte
 Another function called `perspective_transform()`, which is located at the 11th cell of my notebook is also used for the perspective transformation. That function takes the original image as well as the matrix and distortion points we found earlier with the camera calibration (note that a 4th variable is passed to this function to indicate if the image should be plotted or not). This function creates the following source and destination points:
 
 ```
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
+#define offsets
+xfd=54
+yf=450
+offset=205
 
+#get source points
+src = np.float32([
+        (offset, img.shape[0]),
+        (xcenter - xfd, yf),
+        (xcenter + xfd, yf),
+        (img.shape[1] - offset, img.shape[0])])
+
+#get destination points
+dst = np.float32([
+        (offset,img.shape[1]),
+        (offset,0),
+        (img.shape[0] - offset, 0),
+        (img.shape[0] - offset, img.shape[1])])
 ```
+
 This resulted in the following source and destination points:
 
 | Source        | Destination   | 
 |:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
+| 200, 720      | 205, 1280        | 
+| 586, 450      | 205, 0      |
+| 694, 450     | 515, 0      |
+| 1075, 720      | 515, 1280        |
+
+Example of image with source points detected.
+![alt text][image4]
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 

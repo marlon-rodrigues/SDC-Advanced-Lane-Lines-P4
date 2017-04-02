@@ -22,7 +22,7 @@ The goals / steps of this project are the following:
 [video1]: ./project_video.mp4 "Video"
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/571/view) individually and describe how I addressed each point in my implementation. 
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/571/view) individually and describe how I addressed each point in my implementation. 
 ---
 
 ###Camera Calibration

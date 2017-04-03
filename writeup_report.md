@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 [image6]: ./output_images/binary_lines.png "Binary Lines"
 [image7]: ./output_images/final_result.png "Final Result"
 [image8]: ./output_images/final_result_complete.png "Final Resul Step-by-Step"
-[video1]: ./project_video.mp4 "Video"
+[video1]: ./project_results_video.mp4 "Video"
 
 ## Rubric Points
 #### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/571/view) individually and describe how I addressed each point in my implementation. 
@@ -95,9 +95,9 @@ After applying calibration, thresholding and perspective transform, I had a bina
 
 The radius of curvature is calculated on the function called `find_curvature()` by converting the pixels of both the x and y coordinates to meters so it can be fit into the world space. This function is located on cell 15 of my notebook.
 
-The position of the car related to the center of the image is calculated on cell 17 of my notebook, on a function called `draw_lanes_on_real_image()`. The postion is found by simply calculating the distance of the right/left lanes from the center of the picture. With that in hand I convert the pixel value into meters and fit it into the the world space.
+The position of the car related to the center of the image is calculated on cell 16 of my notebook, on a function called `draw_lanes_on_real_image()`. The postion is found by simply calculating the distance of the right/left lanes from the center of the picture. With that in hand I convert the pixel value into meters and fit it into the the world space.
 
-The final result - lane area plotted back onto the real image with the curvature and position information - is located on cell 17 of my notebook. The function `draw_lanes_on_real_image()` takes the polynomial and lines arrays (ploty, left_fitx, right_fitx) as well as the matrix and distortion information and project those lines into the original image - aside of also calculating the position of the car related to the center of the image, as described above.
+The final result - lane area plotted back onto the real image with the curvature and position information - is also located on cell 16 of my notebook. The function `draw_lanes_on_real_image()` takes the polynomial and lines arrays (ploty, left_fitx, right_fitx) as well as the matrix and distortion information and project those lines into the original image - aside of also calculating the position of the car related to the center of the image, as described above.
 
 Here is an example of my result on a test image:
 ![alt text][image7]
@@ -110,9 +110,9 @@ Here is an example of my result on a test image with all the steps taken to plot
 
 ###Pipeline (video)
 
-The pipeline for the video output is located on cell 20 of my notebook. I verified that my pipeline performs reasonably well on the entire project video.
+The pipeline for the video output is located on cells 19 and 20 of my notebook. I verified that my pipeline performs reasonably well on the entire project video.
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_results_video.mp4)
 
 ---
 

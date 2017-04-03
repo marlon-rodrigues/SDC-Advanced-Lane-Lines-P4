@@ -91,13 +91,13 @@ After applying calibration, thresholding and perspective transform, I had a bina
 
 ![alt text][image5]
 
-####5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
+The radius of curvature is calculated on the function called `find_curvature()` by converting the pixels of both the x and y coordinates to meters so it can be fit into the world space. This function is located on cell 15 of my notebook.
 
-I did this in lines # through # in my code in `my_other_file.py`
+The position of the car related to the center of the image is calculated on cell 17 of my notebook, on a function called `draw_lanes_on_real_image()`. The postion is found by simply calculating the distance of the right/left lanes from the center of the picture. With that in hand I convert the pixel value into meters and fit it into the the world space.
 
-####6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+The final result - lane area plotted back onto the real image with the curvature and position information - is located on cell 17 of my notebook. The function `draw_lanes_on_real_image()` takes the polynomial and lines arrays (ploty, left_fitx, right_fitx) as well as the matrix and distortion information and project those lines into the original image - aside of also calculating the position of the car related to the center of the image, as described above.
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+Here is an example of my result on a test image:
 
 ![alt text][image6]
 
@@ -105,7 +105,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 ###Pipeline (video)
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
+The pipeline for the video output is located on cell 20 of my notebook. I verified that my pipeline performs reasonably well on the entire project video.
 
 Here's a [link to my video result](./project_video.mp4)
 

@@ -52,7 +52,7 @@ Here's an example of my output for this step.
 
 ####Perspective Transform
 
-The code for my perspective transform includes a function called `region_of_interest()`, which is located at the 10th cell of my notebook. That function strips out all the noise - sky, trees, etc - from the image, returnnig just the desired portion where the perspective transformation will be applied. 
+The code for my perspective transform includes a function called `region_of_interest()`, which is located at the 10th cell of my notebook. That function strips out all the noise - sky, trees, etc - from the image, returnig just the desired portion where the perspective transformation will be applied. 
 
 Another function called `perspective_transform()`, which is located at the 11th cell of my notebook is also used for the perspective transformation. That function takes the original image as well as the matrix and distortion points we found earlier with the camera calibration (note that a 4th variable is passed to this function to indicate if the image should be plotted or not). This function creates the following source and destination points:
 

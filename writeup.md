@@ -13,12 +13,14 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/undistort_output.png "Undistorted"
-[image2]: ./test_images/test1.jpg "Road Transformed"
-[image3]: ./examples/binary_combo_example.jpg "Binary Example"
-[image4]: ./examples/warped_straight_lines.jpg "Warp Example"
-[image5]: ./examples/color_fit_lines.jpg "Fit Visual"
-[image6]: ./examples/example_output.jpg "Output"
+[image1]: ./output_images/undistort_image.png "Undistorted"
+[image2]: ./output_images/original_threshold_image.png "Original"
+[image3]: ./output_images/thresholded_binary_image.png "Thresholded Binary"
+[image4]: ./output_images/image_with_source_points.png "Source Points"
+[image5]: ./output_images/perspective_transformed_image.png "Perspective Transform"
+[image6]: ./output_images/binary_lines.png "Binary Lines"
+[image7]: ./output_images/final_result.png "Final Result"
+[image8]: ./output_images/final_result_complete.png "Final Resul Step-by-Step"
 [video1]: ./project_video.mp4 "Video"
 
 ## Rubric Points
@@ -85,11 +87,11 @@ Example of image with source points detected.
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image4]
+![alt text][image5]
 
 After applying calibration, thresholding and perspective transform, I had a binary image where the lane lines stand out clearly. To identify what pixels actually composed the lane lines, I used a histogram to verify what are the two most prominent peaks in the graph, which should indicate the x-position of the base of the lane lines. I then use a sliding window technique to search through the image starting from the x-position found by histogram to find and follow the lines up to the top of the frame. The code for the sliding window search is locate at the 13th cell of the notebook, on a function called `find_lines_pixel_position()` that takes the warped image as an argument. That function is called by another function (cell 14th of the notebook, called `draw_binary_lines()`, which takes the warped image as an argument), which, with the results of the `find_lines_pixel_position()` function creates a binary image with the lane lines identified highlighted by fitting the lane lines with a 2nd order polynomial.
 
-![alt text][image5]
+![alt text][image6]
 
 The radius of curvature is calculated on the function called `find_curvature()` by converting the pixels of both the x and y coordinates to meters so it can be fit into the world space. This function is located on cell 15 of my notebook.
 
@@ -98,8 +100,11 @@ The position of the car related to the center of the image is calculated on cell
 The final result - lane area plotted back onto the real image with the curvature and position information - is located on cell 17 of my notebook. The function `draw_lanes_on_real_image()` takes the polynomial and lines arrays (ploty, left_fitx, right_fitx) as well as the matrix and distortion information and project those lines into the original image - aside of also calculating the position of the car related to the center of the image, as described above.
 
 Here is an example of my result on a test image:
+![alt text][image7]
 
-![alt text][image6]
+Here is an example of my result on a test image with all the steps taken to plot the lanes:
+
+![alt text][image8]
 
 ---
 
@@ -115,5 +120,5 @@ Here's a [link to my video result](./project_video.mp4)
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Although the pipeline works reasonably well on the project video, it will fail on the challenge videos. This implies that my pipeline will not perform well where light is not sufficient (fog, clarity on camera lens, etc) as well as where the lane lines are not clearly identifiable (snow, dirt on the road, etc). I believe this could be resolved by searching for the lane lines within a margin from the previous point where the lines were found, instead of searching for the lane lines in each frame, as I'm doing on my pipeline. That would allow the pipeline to be more accurate on where the lanes are even if the lane itself is not actually visible, as it would leverage the information from the previous found point and try to continue on that path, which is a much more reliable method than just guess where the lines are.    
 

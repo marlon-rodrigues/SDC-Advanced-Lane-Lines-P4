@@ -87,9 +87,7 @@ I verified that my perspective transform was working as expected by drawing the 
 
 ![alt text][image4]
 
-After applying calibration, thresholding and perspective transform, I had a binary image where the lane lines stand out clearly. To identify what pixels actually composed the lane lines, I used a histogram to verify what are the two most prominent peaks in the graph, which should indicate the x-position of the base of the lane lines. I then use a sliding window technique to search through the image starting from the x-position found by histogram to find and follow the lines up to the top of the frame. The code for the sliding window search is locate at the 13th cell of the notebook. 
-
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+After applying calibration, thresholding and perspective transform, I had a binary image where the lane lines stand out clearly. To identify what pixels actually composed the lane lines, I used a histogram to verify what are the two most prominent peaks in the graph, which should indicate the x-position of the base of the lane lines. I then use a sliding window technique to search through the image starting from the x-position found by histogram to find and follow the lines up to the top of the frame. The code for the sliding window search is locate at the 13th cell of the notebook, on a function called `find_lines_pixel_position()` that takes the warped image as an argument. That function is called by another function (cell 14th of the notebook, called `draw_binary_lines()`, which takes the warped image as an argument), which, with the results of the `find_lines_pixel_position()` function creates a binary image with the lane lines identified highlighted by fitting the lane lines with a 2nd order polynomial.
 
 ![alt text][image5]
 

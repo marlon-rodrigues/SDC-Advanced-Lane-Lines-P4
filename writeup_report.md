@@ -39,6 +39,8 @@ I then used the output `objpoints` and `imgpoints` to compute the camera calibra
 
 ###Pipeline (single images)
 
+####Threshold Binary Image
+
 To demonstrate this step, I will describe how I apply the distortion correction to one of the test images like this one:
 ![alt text][image2]
 
@@ -47,6 +49,8 @@ I used a combination of color and gradient thresholds to generate a binary image
 Here's an example of my output for this step.
 
 ![alt text][image3]
+
+####Perspective Transform
 
 The code for my perspective transform includes a function called `region_of_interest()`, which is located at the 10th cell of my notebook. That function strips out all the noise - sky, trees, etc - from the image, returnnig just the desired portion where the perspective transformation will be applied. 
 
@@ -89,14 +93,19 @@ I verified that my perspective transform was working as expected by drawing the 
 
 ![alt text][image5]
 
+####Lane pixels and fit to find the lane boundary.
+
 After applying calibration, thresholding and perspective transform, I had a binary image where the lane lines stand out clearly. To identify what pixels actually composed the lane lines, I used a histogram to verify what are the two most prominent peaks in the graph, which should indicate the x-position of the base of the lane lines. I then use a sliding window technique to search through the image starting from the x-position found by histogram to find and follow the lines up to the top of the frame. The code for the sliding window search is locate at the 13th cell of the notebook, on a function called `find_lines_pixel_position()` that takes the warped image as an argument. That function is called by another function (cell 14th of the notebook, called `draw_binary_lines()`, which takes the warped image as an argument), which, with the results of the `find_lines_pixel_position()` function creates a binary image with the lane lines identified highlighted by fitting the lane lines with a 2nd order polynomial.
 
 ![alt text][image6]
+
+####Curvature of the lane and vehicle position with respect to center.
 
 The radius of curvature is calculated on the function called `find_curvature()` by converting the pixels of both the x and y coordinates to meters so it can be fit into the world space. This function is located on cell 15 of my notebook.
 
 The position of the car related to the center of the image is calculated on cell 16 of my notebook, on a function called `draw_lanes_on_real_image()`. The postion is found by simply calculating the distance of the right/left lanes from the center of the picture. With that in hand I convert the pixel value into meters and fit it into the the world space.
 
+####Warp the detected lane boundaries back onto the original image and output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 The final result - lane area plotted back onto the real image with the curvature and position information - is also located on cell 16 of my notebook. The function `draw_lanes_on_real_image()` takes the polynomial and lines arrays (ploty, left_fitx, right_fitx) as well as the matrix and distortion information and project those lines into the original image - aside of also calculating the position of the car related to the center of the image, as described above.
 
 Here is an example of my result on a test image:
